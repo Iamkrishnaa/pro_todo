@@ -35,9 +35,6 @@ export const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 app.set("trust proxy", 1);
 
-app.use(express.static("public"));
-app.set("view engine", "ejs");
-
 // Routes
 app.use("/api/v1", V1Router);
 
