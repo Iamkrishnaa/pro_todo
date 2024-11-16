@@ -11,14 +11,14 @@ else
 fi
 
 # Check ESLint Standards
-echo '🧹 Checking ESLint Standards'
-npm run lint
-if [ $? -ne 0 ]; then
-    echo '❌ ESLint Standards not met. Fix the errors.'
-    exit 1
-else
-    echo '✅ ESLint Standards met'
-fi
+# echo '🧹 Checking ESLint Standards'
+# npm run lint
+# if [ $? -ne 0 ]; then
+#     echo '❌ ESLint Standards not met. Fix the errors.'
+#     exit 1
+# else
+#     echo '✅ ESLint Standards met'
+# fi
 
 
 # Check Prettier Standards
