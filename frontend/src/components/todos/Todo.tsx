@@ -6,14 +6,16 @@ import { format } from "date-fns";
 import { MdDelete, MdEditSquare } from "react-icons/md";
 import DeleteTodoModal from "./DeleteTodoModal";
 import toast from "react-hot-toast";
-import { deleteTodo } from "@/services/remote/todos";
+import { deleteTodo, updateTodo } from "@/services/remote/todos";
 
 export default function SingleTodo({
   todo,
   removeCurrentTodo,
+  toggleTodoStatus,
 }: {
   todo: Todo;
   removeCurrentTodo: (todoId: number) => void;
+  toggleTodoStatus: (todoId: number) => void;
 }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
@@ -52,6 +54,26 @@ export default function SingleTodo({
     setIsDeleting(false);
   };
 
+  const updateTodoHandler = async () => {
+    const response = await updateTodo({
+      todoId: todo.id!.toString(),
+      updateTodo: {
+        isDone: !todo.isDone,
+      },
+    });
+
+    response.fold(
+      (error) => {
+        toast.error(error.message, {
+          id: "update-todo-error",
+        });
+      },
+      () => {
+        toggleTodoStatus(todo.id!);
+      }
+    );
+  };
+
   return (
     <div className="todo-item simple-border-color link-hover mt-4 flex cursor-pointer items-center justify-between rounded-lg border-[1px] p-4 transition-all duration-300">
       <div className="flex flex-1 items-center justify-start gap-4">
@@ -59,8 +81,9 @@ export default function SingleTodo({
           type="checkbox"
           className="h-5 w-5"
           checked={todo.isDone}
-          onChange={() => {
-            console.log("Checkbox clicked");
+          onChange={(e) => {
+            e.preventDefault();
+            updateTodoHandler();
           }}
         />
         <div className="details flex flex-col gap-1">

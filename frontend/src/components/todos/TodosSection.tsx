@@ -105,6 +105,15 @@ export default function TodosSection() {
     });
   };
 
+  const toggleTodoStatus = (todoId: number) => {
+    setPaginatedTodos({
+      ...paginatedTodos!,
+      data: paginatedTodos!.data.map((todo) =>
+        todo.id === todoId ? { ...todo, isDone: !todo.isDone } : todo
+      ),
+    });
+  };
+
   const filterOptions = ["upcoming", "done", "overdue"];
 
   return (
@@ -194,7 +203,11 @@ export default function TodosSection() {
             <>
               {paginatedTodos?.data.map((todo) => (
                 <div key={todo.id}>
-                  <SingleTodo todo={todo} removeCurrentTodo={removeTodoById} />
+                  <SingleTodo
+                    todo={todo}
+                    removeCurrentTodo={removeTodoById}
+                    toggleTodoStatus={toggleTodoStatus}
+                  />
                 </div>
               ))}
             </>

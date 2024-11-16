@@ -12,7 +12,6 @@ const useCreateTodo = () => {
   const [form, setForm] = useState<CreateTodo>({
     name: "",
     shortDescription: "",
-    date: new Date(),
   });
 
   const clearErrors = () => {
