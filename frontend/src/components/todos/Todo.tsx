@@ -112,12 +112,22 @@ export default function SingleTodo({
         </div>
       </div>
       <div className="actions flex gap-2">
-        <button className="link-hover flex h-8 w-8 items-center justify-center rounded-full bg-primary/30 text-primary">
+        <button
+          className="link-hover flex h-8 w-8 items-center justify-center rounded-full bg-primary/30 text-primary"
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+        >
           <MdEditSquare size={18} />
         </button>
         <button
           className="link-hover flex h-8 w-8 items-center justify-center rounded-full bg-danger/30 text-danger"
-          onClick={openDeleteModal}
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            openDeleteModal();
+          }}
         >
           <MdDelete size={18} />
         </button>
