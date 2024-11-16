@@ -128,9 +128,6 @@ export default function TodosSection() {
               : ""}
           </span>
         </div>
-        <button className="btn-primary rounded-lg px-4 py-2 text-base font-semibold">
-          Create Todo
-        </button>
       </div>
 
       {/* Filter and Search Section */}

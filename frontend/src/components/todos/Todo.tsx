@@ -7,6 +7,7 @@ import { MdDelete, MdEditSquare } from "react-icons/md";
 import DeleteTodoModal from "./DeleteTodoModal";
 import toast from "react-hot-toast";
 import { deleteTodo, updateTodo } from "@/services/remote/todos";
+import ShowDetailModal from "./ShowDetailModal";
 
 export default function SingleTodo({
   todo,
@@ -18,6 +19,7 @@ export default function SingleTodo({
   toggleTodoStatus: (todoId: number) => void;
 }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const openDeleteModal = () => {
@@ -26,6 +28,14 @@ export default function SingleTodo({
 
   const closeDeleteModal = () => {
     setIsDeleteModalOpen(false);
+  };
+
+  const openDetailModal = () => {
+    setIsDetailModalOpen(true);
+  };
+
+  const closeDetailModal = () => {
+    setIsDetailModalOpen(false);
   };
 
   const deleteTodoHandler = async () => {
@@ -75,14 +85,18 @@ export default function SingleTodo({
   };
 
   return (
-    <div className="todo-item simple-border-color link-hover mt-4 flex cursor-pointer items-center justify-between rounded-lg border-[1px] p-4 transition-all duration-300">
+    <div
+      className="todo-item simple-border-color link-hover mt-4 flex cursor-pointer items-center justify-between rounded-lg border-[1px] p-4 transition-all duration-300"
+      onClick={openDetailModal}
+    >
       <div className="flex flex-1 items-center justify-start gap-4">
         <input
           type="checkbox"
           className="h-5 w-5"
           checked={todo.isDone}
+          onClick={(e) => e.stopPropagation()}
           onChange={(e) => {
-            e.preventDefault();
+            e.stopPropagation();
             updateTodoHandler();
           }}
         />
@@ -109,11 +123,19 @@ export default function SingleTodo({
         </button>
       </div>
 
+      {/* Delete Modal */}
       <DeleteTodoModal
         isDeleting={isDeleting}
         isDeleteModalOpen={isDeleteModalOpen}
         closeDeleteModal={closeDeleteModal}
         deleteTodoHandler={deleteTodoHandler}
+      />
+
+      {/* Detail Modal */}
+      <ShowDetailModal
+        isDetailModalOpen={isDetailModalOpen}
+        closeDetailModal={closeDetailModal}
+        todo={todo}
       />
     </div>
   );

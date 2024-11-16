@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import TodosSection from "./TodosSection";
-import TodoDescription from "./TodoDescription";
+import CreateTodo from "./CreateTodo";
 import ThemeToggler from "../common/ThemeToggler";
 import Spinner from "../common/Spinner";
 
@@ -19,7 +19,7 @@ export default function TodosPage() {
             <TodosSection />
           </div>
           <div className="todos-details simple-border-color m-4 h-min w-full rounded-lg border-[1px] px-6 py-8 md:w-[330px]">
-            <TodoDescription />
+            <CreateTodo />
           </div>
         </div>
 
