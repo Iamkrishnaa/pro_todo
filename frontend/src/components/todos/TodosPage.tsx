@@ -6,7 +6,13 @@ import Spinner from "../common/Spinner";
 
 export default function TodosPage() {
   return (
-    <Suspense fallback={<Spinner />}>
+    <Suspense
+      fallback={
+        <div className="flex h-screen w-screen items-center justify-center">
+          <Spinner />
+        </div>
+      }
+    >
       <div className="container relative h-screen w-screen">
         <div className="flex flex-col md:flex-row">
           <div className="todos simple-border-color m-4 h-auto w-full flex-1 rounded-lg border-[1px] px-6 py-8">

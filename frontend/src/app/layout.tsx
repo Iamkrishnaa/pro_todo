@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html
       suppressHydrationWarning={true}
-      className="hide-scrollbar scroll-smooth"
+      className="hide-scrollbar scroll-smooth antialiased"
     >
       <body
         className="bg-light transition-all duration-500 dark:bg-dark"
