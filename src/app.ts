@@ -1,4 +1,4 @@
-import express, { Request, json, urlencoded } from "express";
+import express, { Request, Response, json, urlencoded } from "express";
 import env from "@/utils/validateEnv";
 import cors from "cors";
 import { mw } from "request-ip";
@@ -35,6 +35,8 @@ export const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 app.set("trust proxy", 1);
 
+app.set("view engine", "ejs");
+
 // Routes
 app.use("/api/v1", V1Router);
 
@@ -46,16 +48,20 @@ app.get("/health", (_, res) => {
 });
 
 // catch 404 and forward to error handler
-app.use((req: Request) => {
-  throw new ApiError({
-    status: 404,
-    message: "Not Found",
-    errors: [
-      {
-        message: `Cannot ${req.method} ${req.originalUrl}`,
-      },
-    ],
-  });
+app.use((req: Request, res: Response) => {
+  if (req.url.startsWith("/api")) {
+    throw new ApiError({
+      status: 404,
+      message: "Not Found",
+      errors: [
+        {
+          message: `Cannot ${req.method} ${req.originalUrl}`,
+        },
+      ],
+    });
+  }
+
+  res.render("not-found");
 });
 
 //handle all errors
