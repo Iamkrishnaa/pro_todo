@@ -47,19 +47,15 @@ app.get("/health", (_, res) => {
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response) => {
-  if (req.url.startsWith("/api")) {
-    throw new ApiError({
-      status: 404,
-      message: "Not Found",
-      errors: [
-        {
-          message: `Cannot ${req.method} ${req.originalUrl}`,
-        },
-      ],
-    });
-  }
-
-  res.render("not-found");
+  throw new ApiError({
+    status: 404,
+    message: "Not Found",
+    errors: [
+      {
+        message: `Cannot ${req.method} ${req.originalUrl}`,
+      },
+    ],
+  });
 });
 
 //handle all errors
