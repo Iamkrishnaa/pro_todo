@@ -1,0 +1,58 @@
+@use "./animations.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.2) rgba(34, 41, 46, 0);
+  scrollbar-gutter: stable;
+}
+
+body {
+  @apply text-sm;
+  font-family: "Livvic", sans-serif;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.link-hover {
+  @apply hover:bg-dark hover:bg-opacity-10 dark:hover:bg-light dark:hover:bg-opacity-10;
+}
+
+.main-content {
+  @apply px-8;
+}
+
+.btn-primary {
+  @apply bg-primary text-white transition-all duration-300 ease-in-out;
+}
+
+.btn-primary:hover {
+  @apply bg-primary/80;
+}
+
+.simple-border-color {
+  @apply border-gray-500/15 dark:border-gray-200/10;
+}
+
+.text-secondary {
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+.filter-tabs .active {
+  @apply font-extrabold text-primary underline;
+}
