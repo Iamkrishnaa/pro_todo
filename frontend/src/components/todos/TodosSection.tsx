@@ -101,6 +101,7 @@ export default function TodosSection() {
     setPaginatedTodos({
       ...paginatedTodos!,
       data: paginatedTodos!.data.filter((todo) => todo.id !== todoId),
+      totalItems: paginatedTodos!.totalItems - 1,
     });
   };
 
@@ -110,7 +111,14 @@ export default function TodosSection() {
     <div>
       {/* Top Section */}
       <div className="top-section simple-border-color flex flex-row items-center justify-between border-b-[1px] pb-4">
-        <div className="title text-2xl font-bold">Todos</div>
+        <div className="title flex items-center gap-2 text-2xl font-bold">
+          <span>Pro Todos</span>
+          <span className="text-secondary text-base font-semibold">
+            {paginatedTodos?.totalItems
+              ? ` (${paginatedTodos.totalItems})`
+              : ""}
+          </span>
+        </div>
         <button className="btn-primary rounded-lg px-4 py-2 text-base font-semibold">
           Create Todo
         </button>
