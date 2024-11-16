@@ -55,7 +55,7 @@ export default function SingleTodo({
   return (
     <div className="todo-item simple-border-color link-hover mt-4 flex cursor-pointer items-center justify-between rounded-lg border-[1px] p-4 transition-all duration-300">
       <div className="flex flex-1 items-center justify-start gap-4">
-        <input type="checkbox" className="h-5 w-5" />
+        <input type="checkbox" className="h-5 w-5" checked={todo.isDone} />
         <div className="details flex flex-col gap-1">
           <div className="title text-base">{todo.name}</div>
           {/* Date and time */}

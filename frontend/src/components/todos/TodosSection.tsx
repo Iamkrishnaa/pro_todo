@@ -132,8 +132,9 @@ export default function TodosSection() {
               filter === undefined ? "active" : ""
             }`}
             onClick={(e) => {
-              // remove filter
+              e.preventDefault();
               setFilter(undefined);
+              removeQueryParamFromURL("filter");
             }}
           >
             All
@@ -145,6 +146,7 @@ export default function TodosSection() {
                 filter === filterOption ? "active" : ""
               }`}
               onClick={(e) => {
+                e.preventDefault();
                 handleFilter(filterOption);
               }}
             >
