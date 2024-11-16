@@ -29,6 +29,15 @@ const createTodoValidator = (): Array<any> => {
       .bail()
       .isLength({ min: 5 })
       .withMessage("shortDescription must be at least 5 characters"),
+    body("date")
+      .exists()
+      .withMessage("date is required")
+      .bail()
+      .isISO8601({
+        strict: true,
+      })
+      .withMessage("date must be a valid date")
+      .bail(),
   ];
 };
 

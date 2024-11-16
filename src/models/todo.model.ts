@@ -45,6 +45,13 @@ interface ITodo {
    * @type {Date}
    * @optional
    */
+  date?: Date;
+
+  /**
+   * The date when the Todo item was created.
+   * @type {Date}
+   * @optional
+   */
   createdAt?: Date;
 
   /**
@@ -80,7 +87,7 @@ class Todo extends Model<ITodo, Optional<ITodo, "id">> {
       unsigned: true,
     }),
   })
-  public id!: number;
+  id!: number;
 
   @Column({
     type: DataType.STRING,
@@ -98,13 +105,16 @@ class Todo extends Model<ITodo, Optional<ITodo, "id">> {
       },
     },
   })
-  public name!: string;
+  name!: string;
 
   @Column({ type: DataType.TEXT, allowNull: false })
-  public shortDescription!: string;
+  shortDescription!: string;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
-  public isDone!: boolean;
+  isDone!: boolean;
+
+  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  date!: Date;
 
   @CreatedAt
   createdAt!: Date;
