@@ -6,14 +6,8 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { format } from "date-fns";
 
 export default function CreateTodo() {
-  const {
-    form,
-    isCreatingTodo,
-    error,
-    fieldErrors,
-    handleFieldChange,
-    handleSubmit,
-  } = useCreateTodo();
+  const { form, isCreatingTodo, fieldErrors, handleFieldChange, handleSubmit } =
+    useCreateTodo();
 
   return (
     <div>

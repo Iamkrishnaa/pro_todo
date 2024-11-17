@@ -8,6 +8,7 @@ import DeleteTodoModal from "./DeleteTodoModal";
 import toast from "react-hot-toast";
 import { deleteTodo, updateTodo } from "@/services/remote/todos";
 import ShowDetailModal from "./ShowDetailModal";
+import UpdateTodoModal from "./UpdateTodoModal";
 
 export default function SingleTodo({
   todo,
@@ -21,6 +22,8 @@ export default function SingleTodo({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false);
 
   const openDeleteModal = () => {
     setIsDeleteModalOpen(true);
@@ -36,6 +39,14 @@ export default function SingleTodo({
 
   const closeDetailModal = () => {
     setIsDetailModalOpen(false);
+  };
+
+  const openUpdateModal = () => {
+    setIsUpdateModalOpen(true);
+  };
+
+  const closeUpdateModal = () => {
+    setIsUpdateModalOpen(false);
   };
 
   const deleteTodoHandler = async () => {
@@ -64,7 +75,7 @@ export default function SingleTodo({
     setIsDeleting(false);
   };
 
-  const updateTodoHandler = async () => {
+  const toggleDoneHandler = async () => {
     const response = await updateTodo({
       todoId: todo.id!.toString(),
       updateTodo: {
@@ -97,7 +108,7 @@ export default function SingleTodo({
           onClick={(e) => e.stopPropagation()}
           onChange={(e) => {
             e.stopPropagation();
-            updateTodoHandler();
+            toggleDoneHandler();
           }}
         />
         <div className="details flex flex-col gap-1">
@@ -117,6 +128,7 @@ export default function SingleTodo({
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
+            openUpdateModal();
           }}
         >
           <MdEditSquare size={18} />
@@ -146,6 +158,13 @@ export default function SingleTodo({
         isDetailModalOpen={isDetailModalOpen}
         closeDetailModal={closeDetailModal}
         todo={todo}
+      />
+
+      {/* Update Modal */}
+      <UpdateTodoModal
+        isUpdateModalOpen={isUpdateModalOpen}
+        closeUpdateModal={closeUpdateModal}
+        todoItem={todo}
       />
     </div>
   );
