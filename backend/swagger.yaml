@@ -1,0 +1,236 @@
+openapi: 3.0.0
+info:
+  title: Pro Todo API
+  version: 1.0.0
+  description: >-
+    # This is an API documentation for Pro Todo App
+
+  schemes:
+    - http
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Development server
+
+tags:
+  - name: Todos
+    description: Operations about todos
+
+paths:
+  /todos:
+    get:
+      tags:
+        - Todos
+      summary: Get all todos
+      description: >-
+        Returns a list of todos, you can filter the todos by query parameters like `done` and `upcoming`
+      operationId: getTodos
+      parameters:
+        - name: filter
+          in: query
+          description: Filter todos by status
+          required: false
+          schema:
+            type: string
+            enum:
+              - done
+              - upcoming
+              - overdue
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: Page size
+          required: false
+          schema:
+            type: integer
+        - name: search
+          in: query
+          description: Search by name
+          required: false
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Sort by field
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - date
+              - isDone
+              - createdAt
+              - updatedAt
+        - name: order
+          in: query
+          description: Sort order
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+      responses:
+        "200":
+          description: A list of todos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      totalItems:
+                        type: integer
+                      totalPages:
+                        type: integer
+                      currentPage:
+                        type: integer
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            shortDescription:
+                              type: string
+                            date:
+                              type: string
+                            isDone:
+                              type: boolean
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+
+    post:
+      tags:
+        - Todos
+      summary: Create a new todo
+      description: >-
+        Create a new todo
+      operationId: createTodo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                shortDescription:
+                  type: string
+                date:
+                  type: string
+                  format: date
+              required:
+                - name
+                - shortDescription
+                - date
+      responses:
+        "201":
+          description: A new todo created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  shortDescription:
+                    type: string
+                  date:
+                    type: string
+                  isDone:
+                    type: boolean
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+  /todos/{id}:
+    put:
+      tags:
+        - Todos
+      summary: Update a todo
+      description: >-
+        Update a todo
+      operationId: updateTodo
+      parameters:
+        - name: id
+          in: path
+          description: ID of todo to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                shortDescription:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                isDone:
+                  type: boolean
+              required:
+                - name
+                - shortDescription
+                - date
+                - isDone
+      responses:
+        "200":
+          description: A todo updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  shortDescription:
+                    type: string
+                  date:
+                    type: string
+                  isDone:
+                    type: boolean
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+    delete:
+      tags:
+        - Todos
+      summary: Delete a todo
+      description: >-
+        Delete a todo
+      operationId: deleteTodo
+      parameters:
+        - name: id
+          in: path
+          description: ID of todo to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Todo deleted

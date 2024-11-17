@@ -2,6 +2,7 @@ import express, { Request, Response, json, urlencoded } from "express";
 import env from "@/utils/validateEnv";
 import cors from "cors";
 import { mw } from "request-ip";
+import initializeSwagger from "./utils/initializeSwagger";
 
 import { errorHandlerMiddleware } from "@/middlewares";
 import ApiError from "@/errors/apiError";
@@ -34,6 +35,9 @@ export const corsOptions: cors.CorsOptions = {
 // CORS middleware
 app.use(cors(corsOptions));
 app.set("trust proxy", 1);
+
+// initialize swagger
+initializeSwagger(app);
 
 // Routes
 app.use("/api/v1", V1Router);

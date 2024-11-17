@@ -71,7 +71,7 @@ const errorHandlerMiddleware = (
     ...error,
     message: error.message,
     errors: error.errors,
-    ...(env.isDev && { stack: error.stack }),
+    ...(env.isProd && { stack: error.stack }),
   };
 
   if (env.isDev) {
