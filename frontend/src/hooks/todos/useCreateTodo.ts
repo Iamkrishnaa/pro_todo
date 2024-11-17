@@ -19,7 +19,9 @@ const useCreateTodo = () => {
     setFieldErrors({});
   };
 
-  const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFieldChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
 
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -46,6 +48,14 @@ const useCreateTodo = () => {
 
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
+  };
+
+  const resetForm = () => {
+    setForm({
+      name: "",
+      shortDescription: "",
+      date: undefined,
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -79,6 +89,7 @@ const useCreateTodo = () => {
         toast.success("Todo Created Successfully", {
           id: "create-todo-success",
         });
+        resetForm();
       }
     );
   };
