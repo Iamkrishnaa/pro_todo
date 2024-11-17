@@ -29,7 +29,8 @@
     "src/server.ts",
     "src/**/*.ts",
     "src/**/*.json",
-    ".env"
+    ".env",
+    "src/__tests__"
   ],
-  "exclude": ["node_modules", "./build", "src/http", "src/logs", "__tests__"]
+  "exclude": ["node_modules", "./build", "src/http", "src/logs"]
 }

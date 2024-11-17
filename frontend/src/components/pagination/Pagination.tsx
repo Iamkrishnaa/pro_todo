@@ -50,9 +50,11 @@ const Pagination: React.FC<PaginationProps> = ({
 
       <button
         onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
+        disabled={currentPage === totalPages || totalPages === 0}
         className={`${buttonClass} ${
-          currentPage === totalPages ? "text-gray-400" : hoverClass
+          currentPage === totalPages || totalPages === 0
+            ? "text-gray-400"
+            : hoverClass
         }`}
       >
         <FaAngleRight />
@@ -60,9 +62,11 @@ const Pagination: React.FC<PaginationProps> = ({
 
       <button
         onClick={() => handlePageChange(totalPages)}
-        disabled={currentPage === totalPages}
+        disabled={currentPage === totalPages || totalPages === 0}
         className={`${buttonClass} ${
-          currentPage === totalPages ? "text-gray-400" : hoverClass
+          currentPage === totalPages || totalPages === 0
+            ? "text-gray-400"
+            : hoverClass
         } }`}
       >
         <FaAnglesRight />

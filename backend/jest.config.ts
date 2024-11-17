@@ -13,7 +13,7 @@ const config: Config = {
   preset: "ts-jest",
   setupFiles: ["dotenv/config"],
 
-  setupFilesAfterEnv: ["./__tests__/setup.ts"],
+  setupFilesAfterEnv: ["./src/__tests__/setup.ts"],
   testEnvironment: "node",
   testPathIgnorePatterns: ["/node_modules/", "/build/", "awsS3Service.test.ts"],
 

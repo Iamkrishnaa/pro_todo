@@ -198,22 +198,34 @@ export default function TodosSection() {
             </>
           ) : (
             <>
-              {paginatedTodos?.data.map((todo) => (
-                <div key={todo.id}>
-                  <SingleTodo
-                    todo={todo}
-                    removeCurrentTodo={removeTodoById}
-                    toggleTodoStatus={toggleTodoStatus}
-                  />
-                </div>
-              ))}
+              {paginatedTodos?.data.length === 0 ? (
+                <>
+                  <div className="flex h-32 w-full items-center justify-center">
+                    <span className="text-secondary text-lg font-semibold">
+                      Start adding your todos
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {paginatedTodos?.data.map((todo) => (
+                    <div key={todo.id}>
+                      <SingleTodo
+                        todo={todo}
+                        removeCurrentTodo={removeTodoById}
+                        toggleTodoStatus={toggleTodoStatus}
+                      />
+                    </div>
+                  ))}
+                </>
+              )}
             </>
           )}
         </div>
       )}
 
       {/* Pagination Section */}
-      {paginatedTodos && paginatedTodos.totalItems && paginatedTodos && (
+      {paginatedTodos && paginatedTodos.totalItems != 0 && paginatedTodos && (
         <PaginationGroup
           rowsPerPage={rowsPerPage}
           currentPage={currentPage}
