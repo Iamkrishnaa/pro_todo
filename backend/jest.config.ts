@@ -3,6 +3,7 @@ import type { Config } from "jest";
 const config: Config = {
   testTimeout: 50000,
   clearMocks: true,
+  verbose: true,
   collectCoverage: true,
   coverageDirectory: "coverage",
   coveragePathIgnorePatterns: ["/node_modules/"],
@@ -16,8 +17,6 @@ const config: Config = {
   setupFilesAfterEnv: ["./src/__tests__/setup.ts"],
   testEnvironment: "node",
   testPathIgnorePatterns: ["/node_modules/", "/build/", "awsS3Service.test.ts"],
-
-  verbose: true,
 };
 
 export default config;

@@ -53,7 +53,7 @@ export const connectDB = async (): Promise<void> => {
      * @param {boolean} force - If force is true, each DAO will do DROP TABLE IF EXISTS ..., before it tries to create its own table
      * @param {boolean} alter - If alter is true, existing tables will be altered.
      * */
-    await sequelize.sync({ force: false, alter: false });
+    await sequelize.sync({ force: env.isTest, alter: env.isTest });
     logger.info("All models were synchronized successfully.");
   } catch (error) {
     logger.error(`Error connecting to database: ${error}`);
@@ -61,4 +61,5 @@ export const connectDB = async (): Promise<void> => {
   }
 };
 
+export { sequelize };
 export default connectDB;
